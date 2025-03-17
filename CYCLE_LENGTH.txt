@@ -1,0 +1,25 @@
+def solve(head):
+    if not head or not head.next:
+        return -1
+
+    slow = head
+    fast = head
+    hasCycle = False
+    
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            hasCycle = True
+            break
+    
+    if not hasCycle:
+        return -1
+    
+    cycleLength = 1
+    fast = fast.next
+    while fast != slow:
+        fast = fast.next
+        cycleLength += 1
+        
+    return cycleLength
